@@ -1,7 +1,7 @@
-import { Product } from "@/data/types";
 import Image from "next/image";
 import Button from "../common/Button";
 import ProductTag from "../common/ProductTag";
+import { Product } from "@/types/product";
 
 type ProductCardProps = {
   product: Product;
