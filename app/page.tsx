@@ -1,7 +1,9 @@
 import AboutBaida from "@/components/home/AboutBaida";
 import BestSellers from "@/components/home/BestSeller";
 import Hero from "@/components/home/Hero";
+import ParallaxBanner from "@/components/home/ParallaxBanner";
 import TopCategories from "@/components/home/TopCategories";
+import WhyChooseBaida from "@/components/home/WhyChooseBaida";
 
 export default function Home() {
   return (
@@ -10,6 +12,8 @@ export default function Home() {
       <BestSellers/>
       {/* <TopCategories/> */}
       <AboutBaida/>
+      <ParallaxBanner/>
+      <WhyChooseBaida/>
     </main>
   );
 }
