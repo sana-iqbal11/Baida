@@ -15,7 +15,7 @@ export default function ParallaxBanner() {
           Crafted For Moments
         </p>
 
-        <h2 className="text-4xl font-light leading-tight text-white md:text-7xl">
+        <h2 className="text-3xl font-light leading-tight text-white md:text-7xl">
           Light Up Your Space With Elegance
         </h2>
 
