@@ -1,14 +1,21 @@
+import Image from "next/image";
 import Button from "@/components/common/Button";
 
-export default function AboutBaida() {
+
+
+type AboutBaidaProps = {
+  showButton?: boolean;
+};
+
+export default function AboutBaida({ showButton = true }: AboutBaidaProps) {
+  
   return (
-    <section className="bg-white px-6 py-24">
+    <section className="bg-white px-4 py-16 md:px-6 md:py-24">
       <div className="mx-auto max-w-7xl">
-        <div className="overflow-hidden rounded-[36px] bg-[#F8F4EE] shadow-lg">
-          {/* FLEX ROW - always horizontal on large screens */}
-          <div className="flex flex-col lg:flex-row">
-            {/* LEFT: Content */}
-            <div className="flex flex-1 flex-col justify-center px-8 py-12 md:px-14 lg:px-16">
+        <div className="overflow-hidden rounded-[28px] bg-[#F8F4EE] shadow-lg md:rounded-[36px]">
+          <div className="grid lg:grid-cols-[1.1fr_0.9fr]">
+            {/* Content */}
+            <div className="flex flex-col justify-center px-6 py-10 md:px-12 lg:px-16 lg:py-14">
               <p className="mb-3 text-xs uppercase tracking-[0.4em] text-gold">
                 Our Story
               </p>
@@ -17,51 +24,67 @@ export default function AboutBaida() {
                 About <span className="text-gold">BAIDA</span>
               </h2>
 
-              <div className="mt-5 h-[2px] w-20 bg-gold"></div>
+              {/* Same divider style as other sections */}
+              <div className="mt-5 flex items-center gap-3">
+                <span className="h-px w-12 bg-gold"></span>
+                <span className="text-sm text-gold">✦</span>
+                <span className="h-px w-12 bg-gold"></span>
+              </div>
 
-              <p className="mt-8 leading-8 text-brown">
+              <p className="mt-7 text-sm leading-7 text-brown md:text-base md:leading-8">
                 BAIDA is crafted with passion, bringing luxury candles made in
                 small batches using premium ingredients.
               </p>
 
-              <p className="mt-5 leading-8 text-brown">
-                Every product is designed to create warmth, comfort, and elegant
-                atmosphere in your space.
+              <p className="mt-4 text-sm leading-7 text-brown md:text-base md:leading-8">
+                Every product is designed to create warmth, comfort, and an
+                elegant atmosphere in your space.
               </p>
 
               {/* Stats */}
-              <div className="mt-10 flex gap-10">
+              <div className="mt-8 grid grid-cols-3 gap-4">
                 <div>
-                  <h3 className="text-2xl font-semibold text-gold">100%</h3>
-                  <p className="text-sm text-brown">Handcrafted</p>
+                  <h3 className="text-lg font-semibold text-gold md:text-2xl">
+                    100%
+                  </h3>
+                  <p className="text-xs text-brown md:text-sm">Handcrafted</p>
                 </div>
 
                 <div>
-                  <h3 className="text-2xl font-semibold text-gold">Premium</h3>
-                  <p className="text-sm text-brown">Quality</p>
+                  <h3 className="text-lg font-semibold text-gold md:text-2xl">
+                    Premium
+                  </h3>
+                  <p className="text-xs text-brown md:text-sm">Quality</p>
                 </div>
 
                 <div>
-                  <h3 className="text-2xl font-semibold text-gold">Small</h3>
-                  <p className="text-sm text-brown">Batch</p>
+                  <h3 className="text-lg font-semibold text-gold md:text-2xl">
+                    Small
+                  </h3>
+                  <p className="text-xs text-brown md:text-sm">Batch</p>
                 </div>
               </div>
 
-              <div className="mt-10">
-                <Button variant="primary">Shop Collection →</Button>
-              </div>
+             {showButton && (
+  <div className="mt-8">
+    <Button variant="primary">Shop Collection →</Button>
+  </div>
+)}
             </div>
 
-            {/* RIGHT: Image (IMPORTANT FIX) */}
-            <div className="relative w-full lg:w-[45%]">
-              <img
+            {/* Image */}
+            <div className="relative min-h-[360px] md:min-h-[460px] lg:min-h-[560px]">
+              <Image
                 src="/images/aboutbaida.jpg"
                 alt="About BAIDA"
-                className="h-[420px] w-full object-cover lg:h-full"
+                fill
+                className="object-cover"
               />
 
-              <div className="absolute bottom-6 left-6 rounded-xl bg-white/90 px-5 py-3 backdrop-blur">
-                <p className="text-dark font-medium">Handcrafted Luxury</p>
+              <div className="absolute bottom-5 left-5 rounded-xl bg-white/90 px-4 py-3 backdrop-blur md:bottom-6 md:left-6 md:px-5">
+                <p className="text-sm font-medium text-dark md:text-base">
+                  Handcrafted Luxury
+                </p>
               </div>
             </div>
           </div>

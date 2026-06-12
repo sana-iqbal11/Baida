@@ -11,7 +11,7 @@ export default function Home() {
       <Hero />
       <BestSellers/>
       {/* <TopCategories/> */}
-      <AboutBaida/>
+      <AboutBaida showButton={false} />
       <ParallaxBanner/>
       <WhyChooseBaida/>
     </main>
