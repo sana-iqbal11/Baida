@@ -1,69 +1,93 @@
-const navLinks = ["Home", "Products", "Offer", "About Us", "Contact Us"];
+import Link from "next/link";
+
+const navLinks = [
+  { name: "Home", href: "/" },
+  { name: "Products", href: "/products" },
+  { name: "Offer", href: "/" },
+  { name: "About Us", href: "/about" },
+  { name: "Contact Us", href: "/contact" },
+];
 
 export default function Navbar() {
   return (
-    <header className="w-full relative z-50">
-      <div className="bg-gold text-white text-center text-sm py-3 px-4">
-          ✨ Grand Opening Offer • Get 15% OFF on Your First Order
+    <header className="relative z-50 w-full">
+      <div className="bg-gold px-4 py-3 text-center text-sm text-white">
+        ✨ Grand Opening Offer • Get 15% OFF on Your First Order
       </div>
 
-      <nav className="bg-cream border-b border-beige">
+      <nav className="border-b border-beige bg-cream">
         <input id="menu-toggle" type="checkbox" className="peer hidden" />
 
-        <div className="max-w-7xl mx-auto px-6 md:px-10 py-5 flex items-center justify-between">
-          <h1 className="text-dark text-2xl md:text-3xl tracking-[0.4em] font-light">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 md:px-10">
+          <Link
+            href="/"
+            className="text-2xl font-light tracking-[0.4em] text-dark md:text-3xl"
+          >
             BAIDA
-          </h1>
+          </Link>
 
-          <div className="hidden lg:flex items-center gap-10 text-brown">
+          <div className="hidden items-center gap-10 text-brown lg:flex">
             {navLinks.map((link) => (
-              <a key={link} href="#" className="hover:text-dark transition">
-                {link}
-              </a>
+              <Link
+                key={link.name}
+                href={link.href}
+                className="transition hover:text-dark"
+              >
+                {link.name}
+              </Link>
             ))}
           </div>
 
-          <button className="hidden lg:block bg-dark text-cream px-6 py-3 rounded-full">
+          <Link
+            href="https://wa.me/971XXXXXXXXX"
+            target="_blank"
+            className="hidden rounded-full bg-dark px-6 py-3 text-cream lg:block"
+          >
             Order on WhatsApp
-          </button>
+          </Link>
 
           <label
             htmlFor="menu-toggle"
-            className="lg:hidden text-dark text-3xl cursor-pointer z-[60]"
+            className="z-[60] cursor-pointer text-3xl text-dark lg:hidden"
           >
             ☰
           </label>
         </div>
 
-        {/* Dark overlay */}
         <label
           htmlFor="menu-toggle"
-          className="fixed inset-0 bg-black/40 opacity-0 invisible peer-checked:opacity-100 peer-checked:visible transition-all duration-300 lg:hidden"
+          className="invisible fixed inset-0 bg-black/40 opacity-0 transition-all duration-300 peer-checked:visible peer-checked:opacity-100 lg:hidden"
         />
 
-        {/* Mobile Drawer */}
-        <div className="fixed top-0 right-0 h-full w-[85%] max-w-sm bg-cream z-[70] translate-x-full peer-checked:translate-x-0 transition-transform duration-300 ease-in-out lg:hidden shadow-2xl">
-          <div className="flex items-center justify-between px-6 py-5 border-b border-beige">
-            <h2 className="text-dark text-2xl tracking-[0.35em]">BAIDA</h2>
+        <div className="fixed right-0 top-0 z-[70] h-full w-[85%] max-w-sm translate-x-full bg-cream shadow-2xl transition-transform duration-300 ease-in-out peer-checked:translate-x-0 lg:hidden">
+          <div className="flex items-center justify-between border-b border-beige px-6 py-5">
+            <Link href="/" className="text-2xl tracking-[0.35em] text-dark">
+              BAIDA
+            </Link>
 
-            <label
-              htmlFor="menu-toggle"
-              className="text-dark text-3xl cursor-pointer"
-            >
+            <label htmlFor="menu-toggle" className="cursor-pointer text-3xl text-dark">
               ✕
             </label>
           </div>
 
           <div className="flex flex-col gap-6 px-6 py-8 text-brown">
             {navLinks.map((link) => (
-              <a key={link} href="#" className="text-lg hover:text-dark">
-                {link}
-              </a>
+              <Link
+                key={link.name}
+                href={link.href}
+                className="text-lg hover:text-dark"
+              >
+                {link.name}
+              </Link>
             ))}
 
-            <button className="bg-dark text-cream py-3 rounded-full mt-4">
+            <Link
+              href="https://wa.me/971XXXXXXXXX"
+              target="_blank"
+              className="mt-4 rounded-full bg-dark py-3 text-center text-cream"
+            >
               Order on WhatsApp
-            </button>
+            </Link>
           </div>
         </div>
       </nav>

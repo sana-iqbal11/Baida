@@ -48,7 +48,7 @@ export default function AboutBaida() {
               </div>
 
               <div className="mt-10">
-                <Button variant="primary">Explore Collection →</Button>
+                <Button variant="primary">Shop Collection →</Button>
               </div>
             </div>
 
