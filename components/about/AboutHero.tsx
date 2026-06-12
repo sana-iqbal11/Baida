@@ -17,7 +17,7 @@ export default function AboutHero() {
           About BAIDA
         </h1>
 
-        <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-white/90">
+        <p className="mx-auto mt-6 max-w-2xl lg:text-lg leading-8 text-white/90">
           Crafted with passion, inspired by elegance, and designed
           to bring warmth, comfort, and beautiful moments into every space.
         </p>
