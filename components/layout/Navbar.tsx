@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -9,6 +13,19 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  const isActive = (href: string) => pathname === href;
+
   return (
     <header className="relative z-50 w-full">
       <div className="bg-gold px-4 py-3 text-center text-sm text-white">
@@ -16,8 +33,6 @@ export default function Navbar() {
       </div>
 
       <nav className="border-b border-beige bg-cream">
-        <input id="menu-toggle" type="checkbox" className="peer hidden" />
-
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 md:px-10">
           <Link
             href="/"
@@ -31,7 +46,11 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className="transition hover:text-dark"
+                className={`relative pb-2 transition ${
+                  isActive(link.href)
+                    ? "font-medium text-dark after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:bg-gold"
+                    : "hover:text-dark"
+                }`}
               >
                 {link.name}
               </Link>
@@ -41,41 +60,61 @@ export default function Navbar() {
           <Link
             href="https://wa.me/971XXXXXXXXX"
             target="_blank"
-            className="hidden rounded-full bg-dark px-6 py-3 text-cream lg:block"
+            className="hidden rounded-full bg-dark px-6 py-3 text-cream transition hover:bg-brown lg:block"
           >
             Order on WhatsApp
           </Link>
 
-          <label
-            htmlFor="menu-toggle"
+          <button
+            type="button"
+            onClick={() => setIsOpen(true)}
             className="z-[60] cursor-pointer text-3xl text-dark lg:hidden"
           >
             ☰
-          </label>
+          </button>
         </div>
 
-        <label
-          htmlFor="menu-toggle"
-          className="invisible fixed inset-0 bg-black/40 opacity-0 transition-all duration-300 peer-checked:visible peer-checked:opacity-100 lg:hidden"
-        />
+        {isOpen && (
+          <button
+            type="button"
+            aria-label="Close menu overlay"
+            onClick={() => setIsOpen(false)}
+            className="fixed inset-0 z-[60] bg-black/40 lg:hidden"
+          />
+        )}
 
-        <div className="fixed right-0 top-0 z-[70] h-full w-[85%] max-w-sm translate-x-full bg-cream shadow-2xl transition-transform duration-300 ease-in-out peer-checked:translate-x-0 lg:hidden">
+        <div
+          className={`fixed right-0 top-0 z-[70] h-dvh w-[85%] max-w-sm bg-cream shadow-2xl transition-transform duration-300 ease-in-out lg:hidden ${
+            isOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
           <div className="flex items-center justify-between border-b border-beige px-6 py-5">
-            <Link href="/" className="text-2xl tracking-[0.35em] text-dark">
+            <Link
+              href="/"
+              onClick={() => setIsOpen(false)}
+              className="text-2xl tracking-[0.35em] text-dark"
+            >
               BAIDA
             </Link>
 
-            <label htmlFor="menu-toggle" className="cursor-pointer text-3xl text-dark">
+            <button
+              type="button"
+              onClick={() => setIsOpen(false)}
+              className="cursor-pointer text-3xl text-dark"
+            >
               ✕
-            </label>
+            </button>
           </div>
 
-          <div className="flex flex-col gap-6 px-6 py-8 text-brown">
+          <div className="flex h-[calc(100dvh-73px)] flex-col gap-6 overflow-y-auto px-6 py-8 text-brown">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-lg hover:text-dark"
+                onClick={() => setIsOpen(false)}
+                className={`border-b border-beige pb-3 text-lg transition ${
+                  isActive(link.href) ? "font-medium text-dark" : "hover:text-dark"
+                }`}
               >
                 {link.name}
               </Link>
@@ -84,6 +123,7 @@ export default function Navbar() {
             <Link
               href="https://wa.me/971XXXXXXXXX"
               target="_blank"
+              onClick={() => setIsOpen(false)}
               className="mt-4 rounded-full bg-dark py-3 text-center text-cream"
             >
               Order on WhatsApp
