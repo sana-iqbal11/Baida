@@ -5,14 +5,14 @@ import { FiGift, FiHeart, FiSun, FiFeather } from "react-icons/fi";
 
 export default function WhyChooseBaida() {
   const icons = [
-    <FiFeather key="feather" size={26} />,
-    <FiHeart key="heart" size={26} />,
-    <FiGift key="gift" size={26} />,
-    <FiSun key="sun" size={26} />,
+    <FiFeather key="feather" size={24} />,
+    <FiHeart key="heart" size={24} />,
+    <FiGift key="gift" size={24} />,
+    <FiSun key="sun" size={24} />,
   ];
 
   return (
-    <section className="bg-cream px-6 py-20">
+    <section className="bg-cream px-3 py-16 md:px-6 md:py-20">
       <div className="mx-auto max-w-7xl">
         <SectionHeader
           tag="Why Choose Us"
@@ -20,21 +20,21 @@ export default function WhyChooseBaida() {
           description="Thoughtfully crafted candles designed to bring warmth, comfort and elegance into your space."
         />
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {features.map((feature, index) => (
             <div
               key={feature.id}
-              className="group rounded-[28px] border border-beige/60 bg-white/80 p-8 text-center shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-gold hover:shadow-xl"
+              className="group rounded-[24px] border border-gold/40 bg-white p-6 text-center shadow-md transition-all duration-300 lg:p-8 lg:hover:-translate-y-2 lg:hover:border-gold lg:hover:shadow-xl"
             >
-              <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-gold/50 bg-beige text-dark transition group-hover:bg-gold group-hover:text-white">
+              <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full border border-gold/50 bg-gold text-white transition lg:bg-beige lg:text-dark lg:group-hover:bg-gold lg:group-hover:text-white">
                 {icons[index]}
               </div>
 
-              <h3 className="text-2xl font-light text-dark">
+              <h3 className="text-xl font-light text-dark lg:text-2xl">
                 {feature.title}
               </h3>
 
-              <p className="mt-4 leading-7 text-brown">
+              <p className="mt-3 text-sm leading-7 text-brown lg:mt-4 lg:text-base">
                 {feature.description}
               </p>
             </div>
