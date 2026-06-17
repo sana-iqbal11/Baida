@@ -17,8 +17,17 @@ import ProductCard from "../product/ProductCard";
 
 export default function BestSellers() {
   const bestSellers = products.filter((p) => p.isBestSeller);
-
   const swiperRef = useRef<SwiperType | null>(null);
+
+  const handlePrev = () => {
+    swiperRef.current?.slidePrev();
+    swiperRef.current?.autoplay.start();
+  };
+
+  const handleNext = () => {
+    swiperRef.current?.slideNext();
+    swiperRef.current?.autoplay.start();
+  };
 
   return (
     <section className="bg-cream px-6 py-15">
@@ -40,7 +49,7 @@ export default function BestSellers() {
             autoplay={{
               delay: 2500,
               disableOnInteraction: false,
-              pauseOnMouseEnter: true,
+              pauseOnMouseEnter: false,
             }}
             breakpoints={{
               640: { slidesPerView: 2 },
@@ -49,6 +58,7 @@ export default function BestSellers() {
             }}
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
+              swiper.autoplay.start();
             }}
           >
             {bestSellers.map((product) => (
@@ -58,9 +68,8 @@ export default function BestSellers() {
             ))}
           </Swiper>
 
-          {/* ================= Desktop Arrows ================= */}
           <button
-            onClick={() => swiperRef.current?.slidePrev()}
+            onClick={handlePrev}
             className="
               hidden md:flex
               absolute top-1/2 -left-6 z-20
@@ -74,7 +83,7 @@ export default function BestSellers() {
           </button>
 
           <button
-            onClick={() => swiperRef.current?.slideNext()}
+            onClick={handleNext}
             className="
               hidden md:flex
               absolute top-1/2 -right-6 z-20
@@ -87,18 +96,17 @@ export default function BestSellers() {
             <FiArrowRight className="text-xl" />
           </button>
 
-          {/* ================= Mobile Arrows ================= */}
           <div className="mt-8 flex justify-center gap-4 md:hidden">
             <button
-              onClick={() => swiperRef.current?.slidePrev()}
-              className="h-12 w-12 flex items-center justify-center rounded-full bg-dark text-cream shadow-lg"
+              onClick={handlePrev}
+              className="flex h-12 w-12 items-center justify-center rounded-full bg-dark text-cream shadow-lg"
             >
               <FiArrowLeft />
             </button>
 
             <button
-              onClick={() => swiperRef.current?.slideNext()}
-              className="h-12 w-12 flex items-center justify-center rounded-full bg-dark text-cream shadow-lg"
+              onClick={handleNext}
+              className="flex h-12 w-12 items-center justify-center rounded-full bg-dark text-cream shadow-lg"
             >
               <FiArrowRight />
             </button>
