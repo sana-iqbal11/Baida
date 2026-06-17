@@ -6,6 +6,7 @@ import ProductTag from "../common/ProductTag";
 import { Product } from "@/types/product";
 import { useCart } from "@/context/CartContext";
 import AddToCartButton from "./AddToCartButton";
+import toast from "react-hot-toast";
 
 type ProductCardProps = {
   product: Product;
@@ -61,7 +62,9 @@ export default function ProductCard({ product }: ProductCardProps) {
           <AddToCartButton
             product={product}
             className="w-full cursor-pointer whitespace-nowrap"
+            
           />
+          
         </div>
       </div>
     </div>

@@ -3,6 +3,7 @@
 import Button from "@/components/common/Button";
 import { useCart } from "@/context/CartContext";
 import { Product } from "@/types/product";
+import toast from "react-hot-toast";
 
 type Props = {
   product: Product;
@@ -18,7 +19,7 @@ export default function AddToCartButton({ product, className = "" }: Props) {
       className={className}
       onClick={() => {
         addToCart(product);
-        alert(`${product.name} added to cart`);
+       toast.success(`${product.name} added to cart`);
       }}
     >
       Add to Cart
