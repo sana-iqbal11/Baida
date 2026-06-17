@@ -1,9 +1,5 @@
 import { Product } from "@/types/product";
 
-
-
-
-
 export const products: Product[] = [
   {
     id: 1,
@@ -29,7 +25,7 @@ export const products: Product[] = [
     price: 55,
     image: "/images/products/product2.jpg",
     images: [
-      "/images/products/product1.jpg",
+      "/images/products/product2.jpg",
       "/images/products/product2.jpg",
       "/images/products/product2.jpg",
     ],
@@ -56,76 +52,72 @@ export const products: Product[] = [
     size: "250g",
     burnTime: "45 Hours",
   },
-
   {
     id: 4,
-    slug: "oud-luxury",
-    name: "Oud Luxury",
-    price: 65,
-    image: "/images/products/product1.jpg",
+    slug: "amber-bliss",
+    name: "Amber Bliss",
+    price: 60,
+    image: "/images/products/product2.jpg",
     images: [
-      "/images/products/product1.jpg",
       "/images/products/product2.jpg",
+      "/images/products/product1.jpg",
       "/images/products/producty.jpg",
     ],
-    tag: "Hot Seller",
+    tag: "Best Seller",
     isBestSeller: true,
-    description: "A rich oud fragrance inspired by Arabian luxury.",
-    size: "250g",
-    burnTime: "45 Hours",
+    description: "A warm amber candle with a soft luxurious aroma.",
+    size: "230g",
+    burnTime: "40-45 Hours",
   },
-
   {
     id: 5,
-    slug: "oud-luxury",
-    name: "Oud Luxury",
-    price: 65,
+    slug: "musk-elegance",
+    name: "Musk Elegance",
+    price: 58,
     image: "/images/products/product1.jpg",
     images: [
       "/images/products/product1.jpg",
       "/images/products/product2.jpg",
       "/images/products/producty.jpg",
     ],
-    tag: "Hot Seller",
+    tag: "Best Seller",
     isBestSeller: true,
-    description: "A rich oud fragrance inspired by Arabian luxury.",
-    size: "250g",
-    burnTime: "45 Hours",
+    description: "A clean musk fragrance made for calm and elegant spaces.",
+    size: "220g",
+    burnTime: "38-42 Hours",
   },
-
   {
     id: 6,
-    slug: "oud-luxury",
-    name: "Oud Luxury",
-    price: 65,
-    image: "/images/products/product1.jpg",
+    slug: "lavender-calm",
+    name: "Lavender Calm",
+    price: 50,
+    image: "/images/products/product2.jpg",
     images: [
-      "/images/products/product1.jpg",
       "/images/products/product2.jpg",
+      "/images/products/product1.jpg",
       "/images/products/producty.jpg",
     ],
-    tag: "Hot Seller",
+   tag: "Best Seller",
     isBestSeller: true,
-    description: "A rich oud fragrance inspired by Arabian luxury.",
-    size: "250g",
-    burnTime: "45 Hours",
+    description: "A relaxing lavender scent perfect for peaceful evenings.",
+    size: "200g",
+    burnTime: "35-40 Hours",
   },
-
   {
     id: 7,
-    slug: "oud-luxury",
-    name: "Oud Luxury",
-    price: 65,
+    slug: "citrus-glow",
+    name: "Citrus Glow",
+    price: 48,
     image: "/images/products/product1.jpg",
     images: [
       "/images/products/product1.jpg",
       "/images/products/product2.jpg",
       "/images/products/producty.jpg",
     ],
-    tag: "Hot Seller",
+    tag: "Fresh",
     isBestSeller: true,
-    description: "A rich oud fragrance inspired by Arabian luxury.",
-    size: "250g",
-    burnTime: "45 Hours",
+    description: "A fresh citrus candle that brings brightness to your room.",
+    size: "200g",
+    burnTime: "35 Hours",
   },
 ];
