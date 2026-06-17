@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useCart } from "@/context/CartContext";
+import { FiShoppingBag } from "react-icons/fi";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -14,6 +16,7 @@ const navLinks = [
 export default function Navbar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const { cartCount } = useCart();
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "";
@@ -45,11 +48,10 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`relative pb-2 transition ${
-                  isActive(link.href)
+                className={`relative pb-2 transition ${isActive(link.href)
                     ? "font-medium text-dark after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:bg-gold"
                     : "hover:text-dark"
-                }`}
+                  }`}
               >
                 {link.name}
               </Link>
@@ -63,7 +65,18 @@ export default function Navbar() {
           >
             Order on WhatsApp
           </Link>
+          <Link
+            href="/cart"
+            className="relative hidden lg:flex items-center justify-center"
+          >
+            <FiShoppingBag size={24} className="text-dark" />
 
+            {cartCount > 0 && (
+              <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-gold text-xs text-white">
+                {cartCount}
+              </span>
+            )}
+          </Link>
           <button
             type="button"
             onClick={() => setIsOpen(true)}
@@ -83,9 +96,8 @@ export default function Navbar() {
         )}
 
         <div
-          className={`fixed right-0 top-0 z-[70] h-dvh w-[85%] max-w-sm bg-cream shadow-2xl transition-transform duration-300 ease-in-out lg:hidden ${
-            isOpen ? "translate-x-0" : "translate-x-full"
-          }`}
+          className={`fixed right-0 top-0 z-[70] h-dvh w-[85%] max-w-sm bg-cream shadow-2xl transition-transform duration-300 ease-in-out lg:hidden ${isOpen ? "translate-x-0" : "translate-x-full"
+            }`}
         >
           <div className="flex items-center justify-between border-b border-beige px-6 py-5">
             <Link
@@ -111,9 +123,8 @@ export default function Navbar() {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className={`border-b border-beige pb-3 text-lg transition ${
-                  isActive(link.href) ? "font-medium text-dark" : "hover:text-dark"
-                }`}
+                className={`border-b border-beige pb-3 text-lg transition ${isActive(link.href) ? "font-medium text-dark" : "hover:text-dark"
+                  }`}
               >
                 {link.name}
               </Link>
@@ -126,6 +137,19 @@ export default function Navbar() {
               className="mt-4 rounded-full bg-dark py-3 text-center text-cream"
             >
               Order on WhatsApp
+            </Link>
+            <Link
+              href="/cart"
+              onClick={() => setIsOpen(false)}
+              className="flex items-center justify-between border-b border-beige pb-3 text-lg"
+            >
+              <span>Cart</span>
+
+              {cartCount > 0 && (
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gold text-xs text-white">
+                  {cartCount}
+                </span>
+              )}
             </Link>
           </div>
         </div>

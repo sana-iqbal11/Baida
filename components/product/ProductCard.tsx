@@ -1,16 +1,21 @@
+"use client";
+
 import Image from "next/image";
 import Button from "../common/Button";
 import ProductTag from "../common/ProductTag";
 import { Product } from "@/types/product";
+import { useCart } from "@/context/CartContext";
+import AddToCartButton from "./AddToCartButton";
 
 type ProductCardProps = {
   product: Product;
 };
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const { addToCart } = useCart();
+
   return (
     <div className="group relative h-[500px] overflow-hidden rounded-xl bg-beige">
-      {/* IMAGE */}
       <Image
         src={product.image}
         alt={product.name}
@@ -18,15 +23,12 @@ export default function ProductCard({ product }: ProductCardProps) {
         className="object-cover transition-all duration-700 group-hover:scale-110"
       />
 
-      {/* DARK OVERLAY */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-      {/* TAG */}
       <div className="absolute left-4 top-4 z-10">
         <ProductTag label={product.tag} />
       </div>
 
-      {/* TEXT SECTION */}
       <div className="absolute bottom-0 left-0 z-10 w-full p-5 text-white md:p-6">
         <h3 className="text-xl font-light leading-snug break-words md:text-2xl">
           {product.name}
@@ -37,7 +39,6 @@ export default function ProductCard({ product }: ProductCardProps) {
         </p>
       </div>
 
-      {/* BUTTONS */}
       <div
         className="
           absolute inset-0 z-20
@@ -57,12 +58,10 @@ export default function ProductCard({ product }: ProductCardProps) {
             View Details
           </Button>
 
-          <Button
-            variant="primary"
+          <AddToCartButton
+            product={product}
             className="w-full cursor-pointer whitespace-nowrap"
-          >
-            Add to Cart
-          </Button>
+          />
         </div>
       </div>
     </div>

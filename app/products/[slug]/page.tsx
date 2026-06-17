@@ -3,6 +3,7 @@ import { products } from "@/data/products";
 import Button from "@/components/common/Button";
 import SectionHeader from "@/components/common/SectionHeader";
 import ProductCard from "@/components/product/ProductCard";
+import AddToCartButton from "@/components/product/AddToCartButton";
 
 type Props = {
   params: Promise<{
@@ -58,9 +59,7 @@ export default async function ProductDetailsPage({ params }: Props) {
           </div>
 
           <div className="mt-8">
-            <Button variant="primary">
-              Add to Cart
-            </Button>
+          <AddToCartButton product={product} className=" cursor-pointer whitespace-nowrap" />
           </div>
         </div>
       </div>
