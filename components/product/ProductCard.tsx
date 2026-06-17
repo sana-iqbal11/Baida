@@ -22,25 +22,33 @@ export default function ProductCard({ product }: ProductCardProps) {
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
       {/* TAG */}
-      <div className="absolute left-4 top-4">
+      <div className="absolute left-4 top-4 z-10">
         <ProductTag label={product.tag} />
       </div>
 
-      {/* TEXT SECTION (FIXED) */}
-      <div className="absolute bottom-0 left-0 w-full p-5 md:p-6 text-white">
-        <h3 className="text-xl md:text-2xl font-light leading-snug break-words">
+      {/* TEXT SECTION */}
+      <div className="absolute bottom-0 left-0 z-10 w-full p-5 text-white md:p-6">
+        <h3 className="text-xl font-light leading-snug break-words md:text-2xl">
           {product.name}
         </h3>
 
-        <p className="mt-2 text-gold text-base md:text-lg">
+        <p className="mt-2 text-base text-gold md:text-lg">
           AED {product.price}
         </p>
       </div>
 
-      {/* HOVER BUTTONS (FIXED SPACING) */}
-      {/* HOVER BUTTONS (COLUMN LAYOUT FIX) */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-500 group-hover:opacity-100">
-        <div className="flex flex-col gap-3 px-6 w-full max-w-[220px]">
+      {/* BUTTONS */}
+      <div
+        className="
+          absolute inset-0 z-20
+          flex items-center justify-center
+          opacity-100
+          md:opacity-0
+          transition-all duration-500
+          md:group-hover:opacity-100
+        "
+      >
+        <div className="flex w-full max-w-[220px] flex-col gap-3 px-6">
           <Button
             href={`/products/${product.slug}`}
             variant="secondary"
