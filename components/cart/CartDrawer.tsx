@@ -43,8 +43,8 @@ Total: AED ${totalAmount}`;
 
             <aside
                 className={`fixed right-0 top-0 z-[100] h-dvh w-full max-w-md bg-cream shadow-2xl transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${isOpen
-                        ? "translate-x-0 opacity-100"
-                        : "translate-x-full opacity-0"
+                    ? "translate-x-0 opacity-100"
+                    : "translate-x-full opacity-0"
                     }`}
             >
                 <div className="h-1 bg-gradient-to-r from-transparent via-gold to-transparent" />
@@ -161,18 +161,16 @@ Total: AED ${totalAmount}`;
                         <span className="text-2xl font-light">AED {totalAmount}</span>
                     </div>
 
-                    <a
-                        href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-                            message
-                        )}`}
-                        target="_blank"
+                    <Link
+                        href="/checkout"
+                        onClick={onClose}
                         className={`block rounded-full py-4 text-center transition ${cartItems.length === 0
                                 ? "pointer-events-none bg-beige text-brown"
                                 : "bg-dark text-cream hover:bg-brown"
                             }`}
                     >
-                        Checkout on WhatsApp
-                    </a>
+                        Proceed to Checkout
+                    </Link>
                 </div>
             </aside>
         </>
