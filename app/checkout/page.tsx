@@ -9,6 +9,8 @@ import toast from "react-hot-toast";
 export default function CheckoutPage() {
   const { cartItems, totalAmount, clearCart } = useCart();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -21,12 +23,14 @@ export default function CheckoutPage() {
   const whatsappNumber = "971509609311";
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handlePlaceOrder = (e: React.FormEvent<HTMLFormElement>) => {
+  const handlePlaceOrder = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (cartItems.length === 0) {
@@ -34,12 +38,46 @@ export default function CheckoutPage() {
       return;
     }
 
-    const message = `New BAIDA Order
+    setIsLoading(true);
+
+    try {
+      const response = await fetch("/api/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          customer_name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          address: `${formData.emirate}, ${formData.address}`,
+          items: cartItems.map((item) => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            quantity: item.quantity,
+            total: item.price * item.quantity,
+          })),
+          total_amount: totalAmount,
+        }),
+      });
+
+      const order = await response.json();
+
+      if (!response.ok) {
+        toast.error(order.error || "Failed to place order");
+        setIsLoading(false);
+        return;
+      }
+
+      const message = `New BAIDA Order
+
+Order ID: ${order.order_number}
 
 Customer Details:
 Name: ${formData.name}
 Phone: ${formData.phone}
-Email: ${formData.email}
+Email: ${formData.email || "N/A"}
 Emirate: ${formData.emirate}
 Address: ${formData.address}
 Notes: ${formData.notes || "N/A"}
@@ -55,14 +93,18 @@ ${cartItems
 Payment Method: Cash on Delivery
 Total: AED ${totalAmount}`;
 
-    window.open(
-      `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,
-      "_blank"
-    );
+      window.open(
+        `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`,
+        "_blank"
+      );
 
-    clearCart();
+      clearCart();
 
-    window.location.href = "/order-success";
+      window.location.href = `/order-success?order=${order.order_number}`;
+    } catch {
+      toast.error("Something went wrong. Please try again.");
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -152,9 +194,10 @@ Total: AED ${totalAmount}`;
 
               <button
                 type="submit"
-                className="rounded-full bg-dark px-8 py-4 text-cream transition hover:bg-brown"
+                disabled={isLoading}
+                className="rounded-full bg-dark px-8 py-4 text-cream transition hover:bg-brown disabled:cursor-not-allowed disabled:opacity-60"
               >
-                Place Order
+                {isLoading ? "Placing Order..." : "Place Order"}
               </button>
             </div>
           </form>
@@ -165,6 +208,7 @@ Total: AED ${totalAmount}`;
             {cartItems.length === 0 ? (
               <div className="mt-6 text-center">
                 <p className="text-brown">Your cart is empty.</p>
+
                 <Link
                   href="/products"
                   className="mt-5 inline-flex rounded-full bg-dark px-6 py-3 text-cream"
@@ -187,9 +231,11 @@ Total: AED ${totalAmount}`;
 
                     <div className="flex-1">
                       <h3 className="text-dark">{item.name}</h3>
+
                       <p className="text-sm text-brown">
                         Qty: {item.quantity}
                       </p>
+
                       <p className="mt-1 text-sm text-gold">
                         AED {item.price * item.quantity}
                       </p>
